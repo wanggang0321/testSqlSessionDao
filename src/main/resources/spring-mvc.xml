@@ -14,8 +14,22 @@
 	<context:annotation-config/>
 	
 	<!-- 使用Annotation自动注册Bean,只扫描@Controller -->
-	<context:component-scan base-package="com.collegepre.aspen" use-default-filters="false"><!-- base-package 如果多个，用“,”分隔 -->
+	<context:component-scan base-package="com.test" use-default-filters="false"><!-- base-package 如果多个，用“,”分隔 -->
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
+	
+	<!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="viewResolvers"> 
+        	<list>
+        		<!-- 视图文件解析配置 -->
+				<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/> 
+					<property name="prefix" value="${web.view.prefix}"/>
+					<property name="suffix" value="${web.view.suffix}"/>
+				</bean>
+        	</list>
+        </property>
+    </bean>
     
 </beans>
