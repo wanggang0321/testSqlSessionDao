@@ -3,6 +3,11 @@ package com.test.name.controller;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
+/**
+ * 
+ * @author wanggang
+ * from：http://blog.csdn.net/zzy2011266/article/details/42011047
+ */
 public class ChineseName {
 
 	public static void main(String[] args) {  
