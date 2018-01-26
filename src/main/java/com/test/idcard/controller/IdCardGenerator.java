@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import com.test.idcard.util.IdcardUtils;
 /** 
  * 
  * 身份证算法实现
@@ -3643,7 +3645,7 @@ public class IdCardGenerator {
     public static void main(String[] args) {
         IdCardGenerator g = new IdCardGenerator();
         for (int i = 0; i < 10; i++) {
-            //System.out.print(IdcardUtils.validateCard(g.generate()));
+            System.out.print(IdcardUtils.validateCard(g.generate()));
             System.out.print("\t");
             System.out.print(g.generate());
             System.out.print("\t");
