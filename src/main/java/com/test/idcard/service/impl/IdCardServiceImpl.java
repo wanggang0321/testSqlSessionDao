@@ -1,6 +1,14 @@
 package com.test.idcard.service.impl;
 
+import java.util.Calendar;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.test.address.service.IAddressService;
+import com.test.idcard.service.IdCardService;
 
 /**
  * <p>18位身份证验证</p> 
@@ -14,8 +22,89 @@ import org.springframework.stereotype.Service;
  * 5.通过上面得知如果余数是2，就会在身份证的第18位数字上出现罗马数字的Ⅹ。如果余数是10，身份证的最后一位号码就是2。 
  */
 @Service
-public class IdCardServiceImpl {
+public class IdCardServiceImpl implements IdCardService {
 	
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
+	@Autowired
+	private IAddressService addressService;
+	
+	/** 
+     * 生成方法 
+     * @return 
+     */  
+    public String generate() throws Exception {  
+        StringBuilder generater = new StringBuilder();  
+        generater.append(this.randomAreaCode());  
+        generater.append(this.randomBirthday());  
+        generater.append(this.randomCode());  
+        generater.append(this.calcTrailingNumber(generater.toString().toCharArray()));  
+        return generater.toString();  
+    } 
+	
+	public char calcTrailingNumber(char[] chars) {  
+        if (chars.length < 17) {  
+            return ' ';  
+        }  
+        int[] c = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };  
+        char[] r = { '1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2' };  
+        int[] n = new int[17];  
+        int result = 0;  
+        for (int i = 0; i < n.length; i++) {  
+            n[i] = Integer.parseInt(chars[i] + "");  
+        }  
+        for (int i = 0; i < n.length; i++) {  
+            result += c[i] * n[i];  
+        }  
+        return r[result % 11];  
+    }
+	
+	/** 
+     * 随机地区 
+     * @return 
+     */  
+    public int randomAreaCode() throws Exception {  
+        return addressService.randomAreaCode();  
+    } 
+	
+	/** 
+     * 随机出生日期 
+     * @return 
+     */  
+    public String randomBirthday() {  
+        Calendar birthday = Calendar.getInstance();  
+        birthday.set(Calendar.YEAR, (int) (Math.random() * 60) + 1950);  
+        birthday.set(Calendar.MONTH, (int) (Math.random() * 12));  
+        birthday.set(Calendar.DATE, (int) (Math.random() * 31));  
+  
+        StringBuilder builder = new StringBuilder();  
+        builder.append(birthday.get(Calendar.YEAR));  
+        long month = birthday.get(Calendar.MONTH) + 1;  
+        if (month < 10) {  
+            builder.append("0");  
+        }  
+        builder.append(month);  
+        long date = birthday.get(Calendar.DATE);  
+        if (date < 10) {  
+            builder.append("0");  
+        }  
+        builder.append(date);  
+        return builder.toString();  
+    } 
+	
+	/** 
+     * 随机产生3位数 
+     * @return 
+     */  
+    public String randomCode() {  
+        int code = (int) (Math.random() * 1000);  
+        if (code < 10) {  
+            return "00" + code;  
+        } else if (code < 100) {  
+            return "0" + code;  
+        } else {  
+            return "" + code;  
+        }  
+    }
 	
 }

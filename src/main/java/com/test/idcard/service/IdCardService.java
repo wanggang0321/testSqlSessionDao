@@ -6,5 +6,7 @@ package com.test.idcard.service;
  * 2018年1月26日
  */
 public interface IdCardService {
-
+	
+	public String generate() throws Exception;
+	
 }
