@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.test.idcard.service.IdCardService;
 
@@ -17,9 +18,13 @@ public class IdCardController {
 	@Autowired
 	private IdCardService idCardService;
 	
-	
-	public void generate() throws Exception {
-		
+	@RequestMapping(value="/generate", method={RequestMethod.GET, RequestMethod.POST})
+	public void generate() {
+		try {
+			idCardService.generate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
