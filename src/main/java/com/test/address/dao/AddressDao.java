@@ -3,6 +3,9 @@ package com.test.address.dao;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class AddressDao {
 	
 	public static final Map<String, Integer> areaCode = new HashMap<String, Integer>();

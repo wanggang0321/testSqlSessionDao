@@ -42,7 +42,7 @@
 	<servlet-name>TestServlet</servlet-name>
   </filter-mapping>
   
-  <!-- <servlet>
+  <servlet>
     <servlet-name>springServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
@@ -54,10 +54,8 @@
   <servlet-mapping>
     <servlet-name>springServlet</servlet-name>
     <url-pattern>/</url-pattern>
-  </servlet-mapping> -->
-  <welcome-file-list>
-    <welcome-file>/modules/system/login/login.jsp</welcome-file>
-  </welcome-file-list>
+  </servlet-mapping>
+  
   <servlet>
     <description></description>
     <display-name>TestServlet</display-name>
@@ -78,4 +76,9 @@
     <servlet-name>HelloServlet</servlet-name>
     <url-pattern>/helloServlet</url-pattern>
   </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>/modules/system/login/login.jsp</welcome-file>
+  </welcome-file-list>
+  
 </web-app>
