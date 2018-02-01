@@ -11,7 +11,7 @@ import com.test.phone.service.IPhoneService;
 
 @Controller
 @RequestMapping("/phone")
-public class IPhoneController {
+public class PhoneController {
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
