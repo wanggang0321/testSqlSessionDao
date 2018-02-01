@@ -19,8 +19,10 @@ public class PersonServiceImpl implements IPersonService {
 	public Person createPerson() throws Exception {
 		
 		//姓名
+		String chineseName = nameService.generate();
 		
 		//身份证号
+		String idCardNumber = idCardService.generate();
 		
 		//性别
 		
