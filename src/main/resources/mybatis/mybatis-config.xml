@@ -4,6 +4,23 @@
 
 <configuration>
 
+	<!-- 和Spring整合后environment配置都会被干掉 -->
+	<environments default="development">
+		
+		<environment id="development">
+			<!-- 使用jdbc事务管理，目前由mybatis来管理 -->
+			<transactionManager type="JDBC"></transactionManager>
+			<!-- 数据库连接池，目前由mybatis来管理 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver"/>
+				<property name="url" value="jdbc:mysql://localhost:3306/test0129"/>
+				<property name="username" value="root"/>
+				<property name="password" value="123456"/>
+			</dataSource>
+		</environment>
+	
+	</environments>
+
 	<settings>
 		
 		<!-- 这个配置使全局的映射器启用或禁用缓存 -->  
