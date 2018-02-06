@@ -6,15 +6,20 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ppdtbb.user.pojo.User;
 
 public class MyBatisFirst {
 	
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
 	public SqlSession getSqlSession() throws Exception {
 		
 		//MyBatis的配置文件
-		String xmlFile = "mybatis-config.xml";
+		String xmlFile = "mybatis/mybatis-config.xml";
 		
 		//得到配置文件的流
 		InputStream inputStream = Resources.getResourceAsStream(xmlFile);
@@ -28,6 +33,15 @@ public class MyBatisFirst {
 		return sqlSession;
 	}
 	
+	@Test
+	public void get() {
+		try {
+			findUserById(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void findUserById(Integer userId) throws Exception {
 		
 		//获得SqlSession
@@ -39,7 +53,9 @@ public class MyBatisFirst {
 		 * 第二个参数：指定和映射文件中parameterType类型所匹配的参数
 		 */
 		//selectOne查询出一条记录进行映射
-		User user = session.selectOne("", userId);
+		User user = session.selectOne("test0206.findUserById", userId);
+		
+		logger.info("user is :" + user);
 		
 		//释放资源
 		session.close();
