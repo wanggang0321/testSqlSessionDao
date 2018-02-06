@@ -10,4 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from user where id = #{id}
 	</select>
 	
+	<!-- 根据用户姓名模糊查询，可能返回多条用户信息 -->
+	<select id="findUserByName" parameterType="java.lang.String" resultType="com.ppdtbb.user.pojo.User">
+		select * from user where username like '%${value}%'
+		<!-- 这样传参也是可以的：select * from user where username like '%${_parameter}%' -->
+	</select>
+	
 </mapper>
