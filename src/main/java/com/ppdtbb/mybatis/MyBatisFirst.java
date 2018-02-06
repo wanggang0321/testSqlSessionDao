@@ -38,7 +38,7 @@ public class MyBatisFirst {
 	public void get() {
 		try {
 //			findUserById(1);
-			findUserByName("1");
+			findUserByName("国");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
