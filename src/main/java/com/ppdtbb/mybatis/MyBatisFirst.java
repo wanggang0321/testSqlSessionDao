@@ -111,9 +111,6 @@ public class MyBatisFirst {
 		session.close();
 	}
 	
-	/**
-	 * 删除用户
-	 */
 	public void deleteUser(Integer id) throws Exception {
 		
 		//获得SqlSession
@@ -128,9 +125,6 @@ public class MyBatisFirst {
 		session.close();
 	}
 	
-	/**
-	 * 更新用户信息
-	 */
 	public void updateUser() throws Exception {
 		
 		//获得SqlSession
