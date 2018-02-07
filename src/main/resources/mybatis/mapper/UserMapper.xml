@@ -4,7 +4,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="test0206">
-
+	
+	<!-- 新增用户 -->
+	<insert id="">
+		INSERT INTO USER (username,birthday,sex,address) VALUES ()
+	</insert>
+	
 	<!-- 通过id查询用户 -->
 	<select id="findUserById" parameterType="int" resultType="com.ppdtbb.user.pojo.User">
 		select * from user where id = #{id}
