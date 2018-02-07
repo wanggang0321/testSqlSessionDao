@@ -43,6 +43,10 @@ public class MyBatisFirst {
 			
 			User user = createUser();
 			insertUser(user);
+			
+//			deleteUser(9);
+			
+//			updateUser();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -107,6 +111,43 @@ public class MyBatisFirst {
 		session.close();
 	}
 	
+	/**
+	 * 删除用户
+	 */
+	public void deleteUser(Integer id) throws Exception {
+		
+		//获得SqlSession
+		SqlSession session = getSqlSession();
+		
+		session.delete("test0206.deleteUser", id);
+		
+		//提交事务
+		session.commit();
+		
+		//释放资源
+		session.close();
+	}
+	
+	/**
+	 * 更新用户信息
+	 */
+	public void updateUser() throws Exception {
+		
+		//获得SqlSession
+		SqlSession session = getSqlSession();
+		
+		User updateUser = new User("奚文文", new Date(), "女", "北京市西城区");
+		updateUser.setId(4);
+		
+		session.update("test0206.updateUser", updateUser);
+		
+		//提交事务
+		session.commit();
+		
+		//释放资源
+		session.close();
+	}
+	
 	private void printUserInfo(List<User> userList) {
 		for(User user : userList) {
 			printUserInfo(user);
@@ -122,10 +163,10 @@ public class MyBatisFirst {
 		
 		User user = new User();
 		
-		user.setUsername("曹朝霞");
+		user.setUsername("邵玉一");
 		user.setSex("女");
 		user.setBirthday(new Date());
-		user.setAddress("北京市朝阳区");
+		user.setAddress("湖南省 永州市 祁阳县");
 		
 		return user;
 	}

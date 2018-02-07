@@ -9,6 +9,20 @@ public class User {
 	private Date birthday;
 	private String sex;
 	private String address;
+	
+	public User() {
+		super();
+	}
+
+	public User(String username, Date birthday, String sex,
+			String address) {
+		super();
+		this.username = username;
+		this.birthday = birthday;
+		this.sex = sex;
+		this.address = address;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

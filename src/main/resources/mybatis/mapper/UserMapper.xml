@@ -37,4 +37,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from user where username like '%${_parameter}%' -->
 	</select>
 	
+	<!-- 删除用户 -->
+	<delete id="deleteUser" parameterType="java.lang.Integer">
+		delete from user where id=#{id}
+	</delete>
+	
+	<!-- 更新用户 -->
+	<update id="updateUser" parameterType="com.ppdtbb.user.pojo.User">
+		update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} where id=#{id}
+	</update>
+	
 </mapper>
