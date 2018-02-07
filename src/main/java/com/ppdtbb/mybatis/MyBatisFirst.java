@@ -1,6 +1,7 @@
 package com.ppdtbb.mybatis;
 
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -38,10 +39,32 @@ public class MyBatisFirst {
 	public void get() {
 		try {
 //			findUserById(1);
-			findUserByName("国");
+//			findUserByName("国");
+			
+			User user = createUser();
+			insertUser(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void insertUser(User user) throws Exception {
+		
+		//获得SqlSession
+		SqlSession session = getSqlSession();
+		
+		logger.info("User id is {} before adding.", user.getId());
+		
+		//添加一项
+		session.insert("test0206.insertUser", user);
+		
+		//提交事务
+		session.commit();
+		
+		logger.info("User id is {} after adding.", user.getId());
+		
+		//释放资源
+		session.close();
 	}
 	
 	public void findUserById(Integer userId) throws Exception {
@@ -58,6 +81,7 @@ public class MyBatisFirst {
 		User user = session.selectOne("test0206.findUserById", userId);
 		
 		logger.info("user is :" + user);
+		printUserInfo(user);
 		
 		//释放资源
 		session.close();
@@ -77,9 +101,33 @@ public class MyBatisFirst {
 		List<User> userList = session.selectList("test0206.findUserByName", name);
 		
 		logger.info("userList is :" + userList);
+		printUserInfo(userList);
 		
 		//释放资源
 		session.close();
+	}
+	
+	private void printUserInfo(List<User> userList) {
+		for(User user : userList) {
+			printUserInfo(user);
+		}
+	}
+	
+	private void printUserInfo(User user) {
+		System.out.println("user info : " + user.getUsername() + ", " + user.getSex());
+		logger.info("user info : " + user.getUsername() + ", " + user.getSex());
+	}
+	
+	private User createUser() throws Exception {
+		
+		User user = new User();
+		
+		user.setUsername("曹朝霞");
+		user.setSex("女");
+		user.setBirthday(new Date());
+		user.setAddress("北京市朝阳区");
+		
+		return user;
 	}
 	
 }
