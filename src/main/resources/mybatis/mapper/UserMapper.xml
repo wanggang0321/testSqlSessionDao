@@ -22,6 +22,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="user1.username!=null and user1.username!=''">
 				and user.username like '%${user1.username}%'
 			</if>
+			<if test="user1.chineseName!=null and user1.chineseName!=''">
+				and user.chineseName like '%${user1.chineseName}%'
+			</if>
 		</if>
 		<if test="ids!=null">
 			<!-- 最终效果是：AND (id=1 OR id=2) -->

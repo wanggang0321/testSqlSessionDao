@@ -130,7 +130,7 @@ public class MyBatisFirst {
 		//获得SqlSession
 		SqlSession session = getSqlSession();
 		
-		User updateUser = new User("奚文文", new Date(), "女", "北京市西城区");
+		User updateUser = new User("奚文文", 1, new Date(), "女", "北京市西城区");
 		updateUser.setId(4);
 		
 		session.update("test0206.updateUser", updateUser);

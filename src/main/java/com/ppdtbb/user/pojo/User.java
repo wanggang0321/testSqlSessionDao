@@ -6,6 +6,8 @@ public class User {
 	
 	private Integer id;
 	private String username;
+	//这里是个坑
+	private Integer chineseName;
 	private Date birthday;
 	private String sex;
 	private String address;
@@ -14,10 +16,11 @@ public class User {
 		super();
 	}
 
-	public User(String username, Date birthday, String sex,
+	public User(String username, Integer chineseName, Date birthday, String sex,
 			String address) {
 		super();
 		this.username = username;
+		this.chineseName = chineseName;
 		this.birthday = birthday;
 		this.sex = sex;
 		this.address = address;
@@ -52,6 +55,12 @@ public class User {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public Integer getChineseName() {
+		return chineseName;
+	}
+	public void setChineseName(Integer chineseName) {
+		this.chineseName = chineseName;
 	}
 	
 }

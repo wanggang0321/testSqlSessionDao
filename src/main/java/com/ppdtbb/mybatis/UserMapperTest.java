@@ -68,6 +68,11 @@ public class UserMapperTest {
 		User userQuery = new User();
 		userQuery.setSex("男");
 		userQuery.setUsername("国");
+		/*
+		 * ChineseName属性设置为Integer类型
+		 * 这里设置为0，<if test="user1.chineseName!=null and user1.chineseName!=''">会返回false
+		 */
+		userQuery.setChineseName(0);
 		userQueryVo.setUser1(userQuery);
 		
 		//传入多个id
