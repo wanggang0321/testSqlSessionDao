@@ -5,11 +5,15 @@ import java.util.Date;
 public class User {
 	
 	private Integer id;
+	//用户名称
 	private String username;
-	//这里是个坑
+	//Integer这里是个坑
 	private Integer chineseName;
+	//生日
 	private Date birthday;
+	//性别
 	private String sex;
+	//地址
 	private String address;
 	
 	public User() {
