@@ -13,6 +13,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="address" property="address"/>
 	</resultMap>
 	
+	<!-- sql片段 -->
+	<sql id="query_user_where">
+		<if test="user1!=null">
+			<if test="user1.sex!=null and user1.sex!=''">
+				and user.sex=#{user1.sex}
+			</if>
+			<if test="user1.username!=null and user1.username!=''">
+				and user.username like '%${user1.username}%'
+			</if>
+		</if>
+	</sql>
+	
 	<!-- 新增用户 -->
 	<insert id="insertUser" parameterType="com.ppdtbb.user.pojo.User">
 		INSERT INTO USER (username,birthday,sex,address) VALUES (#{username},#{birthday},#{sex},#{address})
@@ -56,10 +68,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 用户信息综合查询 -->
-	<select id="findUserList" parameterType="com.ppdtbb.user.pojo.UserQueryVo" resultType="com.ppdtbb.user.pojo.User">
-		<!-- select * from user where sex=#{user1.sex} and username like '%${user1.username}%' -->
+	<!-- <select id="findUserList" parameterType="com.ppdtbb.user.pojo.UserQueryVo" resultType="com.ppdtbb.user.pojo.User">
+		select * from user where sex=#{user1.sex} and username like '%${user1.username}%'
 		select * from user
-		<!-- where可以自动去掉条件中的第一个and -->
+		where可以自动去掉条件中的第一个and
 		<where>
 			<if test="user1!=null">
 				<if test="user1.sex!=null and user1.sex!=''">
@@ -69,6 +81,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					and user.username like '%${user1.username}%'
 				</if>
 			</if>
+		</where>
+	</select> -->
+	
+	<!-- 用户信息综合查询 -->
+	<select id="findUserList" parameterType="com.ppdtbb.user.pojo.UserQueryVo" resultType="com.ppdtbb.user.pojo.User">
+		select * from user
+		<where>
+			<!-- 引用sql片段的id，如果refid指定的id不在本mapper文件中，需要在前面加上namespace -->
+			<include refid="query_user_where"></include>
+			<!-- 还可以引用其它sql片段 -->
 		</where>
 	</select>
 	
