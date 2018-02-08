@@ -57,7 +57,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 用户信息综合查询 -->
 	<select id="findUserList" parameterType="com.ppdtbb.user.pojo.UserQueryVo" resultType="com.ppdtbb.user.pojo.User">
-		select * from user where sex=#{user1.sex} and username like '%${user1.username}%'
+		<!-- select * from user where sex=#{user1.sex} and username like '%${user1.username}%' -->
+		select * from user
+		<!-- where可以自动去掉条件中的第一个and -->
+		<where>
+			<if test="user1!=null">
+				<if test="user1.sex!=null and user1.sex!=''">
+					and user.sex=#{user1.sex}
+				</if>
+				<if test="user1.username!=null and user1.username!=''">
+					and user.username like '%${user1.username}%'
+				</if>
+			</if>
+		</where>
 	</select>
 	
 </mapper>
