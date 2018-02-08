@@ -23,6 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and user.username like '%${user1.username}%'
 			</if>
 		</if>
+		<if test="ids!=null">
+			<!-- 最终效果是：AND (id=1 OR id=2) -->
+			<foreach collection="ids" item="user_id" open="AND (" close=")" separator="OR">
+				id=#{user_id}
+			</foreach>
+		</if>
 	</sql>
 	
 	<!-- 新增用户 -->
