@@ -5,6 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.ppdtbb.mybatis.mapper.UserMapper">
 	
+	<resultMap type="user" id="userResultMap">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="sex" property="sex"/>
+		<result column="birthday" property="sex"/>
+		<result column="address" property="address"/>
+	</resultMap>
+	
 	<!-- 新增用户 -->
 	<insert id="insertUser" parameterType="com.ppdtbb.user.pojo.User">
 		INSERT INTO USER (username,birthday,sex,address) VALUES (#{username},#{birthday},#{sex},#{address})
@@ -46,5 +54,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateUser" parameterType="com.ppdtbb.user.pojo.User">
 		update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} where id=#{id}
 	</update>
+	
+	<!-- 用户信息综合查询 -->
+	<select id="findUserList" parameterType="com.ppdtbb.user.pojo.UserQueryVo" resultType="com.ppdtbb.user.pojo.User">
+		select * from user where sex=#{user1.sex} and username like '%${user1.username}%'
+	</select>
 	
 </mapper>

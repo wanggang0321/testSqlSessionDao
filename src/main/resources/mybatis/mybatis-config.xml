@@ -3,7 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-
+	
+	<properties resource="db.properties"></properties>
+	
 	<settings>
 		
 		<!-- 这个配置使全局的映射器启用或禁用缓存 -->  
@@ -14,8 +16,10 @@
 	</settings>
 	
 	<typeAliases>
-	
+		
 		<typeAlias alias="Role" type="com.test.role.entity.Role"/>
+		<!-- 批量别名定义(这个常用)指定一个包名，mybatis会自动的扫描包中po类，自动定义别名，别名就是类名（首字母大写或小写都可以） -->
+		<package name="com.ppdtbb.user.pojo"/>
 		
 	</typeAliases>
 
@@ -27,10 +31,10 @@
 			<transactionManager type="JDBC"></transactionManager>
 			<!-- 数据库连接池，目前由mybatis来管理 -->
 			<dataSource type="POOLED">
-				<property name="driver" value="com.mysql.jdbc.Driver"/>
-				<property name="url" value="jdbc:mysql://localhost:3306/test0129"/>
-				<property name="username" value="root"/>
-				<property name="password" value="123456"/>
+				<property name="driver" value="${jdbc.driver}"/>
+				<property name="url" value="${jdbc.url}"/>
+				<property name="username" value="${jdbc.username}"/>
+				<property name="password" value="${jdbc.password}"/>
 			</dataSource>
 		</environment>
 	
@@ -41,6 +45,9 @@
 		<mapper resource="mybatis/mapper/User.xml"/>
 		<mapper resource="mybatis/mapper/RoleMapper.xml"/>
 		<mapper resource="mybatis/mapper/UserMapper.xml"/>
+		
+		<!-- 通过mapper接口来加载。需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中。 -->
+		<!-- <mapper class="com.ppdtbb.mybatis.mapper.UserMapper"/> -->
 	
 	</mappers>
 

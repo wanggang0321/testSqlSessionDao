@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.ppdtbb.mybatis.mapper.UserMapper;
 import com.ppdtbb.user.pojo.User;
+import com.ppdtbb.user.pojo.UserQueryVo;
 
 public class UserMapperTest {
 	
@@ -54,6 +55,30 @@ public class UserMapperTest {
 			logger.info("user info is :" + user.getUsername() + user.getBirthday() + user.getAddress());
 		}
 		sqlSession.close();
+	}
+	
+	@Test
+	public void testFindUserList() {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		//创建UserMapper对象，MyBatis自动生成mapper代理对象
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		
+		UserQueryVo userQueryVo = new UserQueryVo();
+		User userQuery = new User();
+		userQuery.setSex("男");
+		userQuery.setUsername("国");
+		userQueryVo.setUser1(userQuery);
+		
+		try {
+			List<User> userList = userMapper.findUserList(userQueryVo);
+			for(User user : userList) {
+				logger.info("user info is :" + user.getUsername() + user.getBirthday() + user.getAddress());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
 	}
 	
 }

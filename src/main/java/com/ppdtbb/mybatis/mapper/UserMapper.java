@@ -3,6 +3,7 @@ package com.ppdtbb.mybatis.mapper;
 import java.util.List;
 
 import com.ppdtbb.user.pojo.User;
+import com.ppdtbb.user.pojo.UserQueryVo;
 
 //mapper接口，相当于dao接口
 public interface UserMapper {
@@ -21,5 +22,8 @@ public interface UserMapper {
 	
 	//更新用户
 	public void updateUser() throws Exception;
+	
+	//用户信息综合查询
+	public List<User> findUserList(UserQueryVo userQueryVo) throws Exception;
 	
 }
