@@ -95,4 +95,9 @@ public class UserMapperTest {
 		}
 	}
 	
+	@Test
+	public void testUserMapperOrders() {
+		SqlSession session = sqlSessionFactory.openSession();
+	}
+	
 }

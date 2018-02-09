@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ppdtbb.user.mapper.UserMapperOrders">
+	
+	<!-- 查询订单，关联查询用户信息 -->
+	<select id="findOrdersUser" resultType="com.ppdtbb.orders.vo.OrdersCustom">
+		SELECT
+			o.*,u.username,u.sex,u.address
+		FROM
+			orders o
+			LEFT JOIN USER u ON o.user_id=u.id
+	</select>
+	
+</mapper>
