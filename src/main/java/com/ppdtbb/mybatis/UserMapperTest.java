@@ -14,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ppdtbb.mybatis.mapper.UserMapper;
+import com.ppdtbb.orders.vo.OrdersCustom;
+import com.ppdtbb.user.mapper.UserMapperOrders;
 import com.ppdtbb.user.pojo.User;
 import com.ppdtbb.user.pojo.UserQueryVo;
 
@@ -98,6 +100,15 @@ public class UserMapperTest {
 	@Test
 	public void testUserMapperOrders() {
 		SqlSession session = sqlSessionFactory.openSession();
+		UserMapperOrders userMapperOrders = session.getMapper(UserMapperOrders.class);
+		try {
+			List<OrdersCustom> ordersCustomList = userMapperOrders.findOrdersUser();
+			for(OrdersCustom oc : ordersCustomList) {
+				logger.info("订单号：" + oc.getNumber() + ", 订单时间：" + oc.getCreatetime());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
