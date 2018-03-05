@@ -16,7 +16,7 @@ public class CommonInterceptor implements HandlerInterceptor {
 		
 		logger.info("================== CommonInterceptor preHandle ==================");
 		
-		return false;
+		return true;
 	}
 
 	public void postHandle(HttpServletRequest request,
