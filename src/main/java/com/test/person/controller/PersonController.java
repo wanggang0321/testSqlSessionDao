@@ -25,7 +25,10 @@ public class PersonController {
 			Person person = personService.createPerson();
 			logger.info(person.getName() + " " 
 					+ person.getIdCardNumber() + " " 
-					+ person.getCellphone());
+					+ person.getSex() + " "
+					+ person.getAge() + " "
+					+ person.getCellphone() + " "
+					+ person.getAddress());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
