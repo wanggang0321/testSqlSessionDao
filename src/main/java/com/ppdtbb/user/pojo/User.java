@@ -15,6 +15,8 @@ public class User {
 	private String sex;
 	//地址
 	private String address;
+	//创建日期
+	private Date createTime;
 	
 	public User() {
 		super();
@@ -65,6 +67,12 @@ public class User {
 	}
 	public void setChineseName(Integer chineseName) {
 		this.chineseName = chineseName;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 	
 }
